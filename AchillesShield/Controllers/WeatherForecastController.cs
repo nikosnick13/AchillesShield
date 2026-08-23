@@ -21,6 +21,12 @@ namespace AchillesShield.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+
+        }
+
+        [HttpGet(Name = "sayHello")]
+        public static string sayHello() {
+            return "Hello World";
         }
     }
 }
