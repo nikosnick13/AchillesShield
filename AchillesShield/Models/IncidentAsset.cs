@@ -7,5 +7,5 @@ public class IncidentAsset
 
     // Navigation Properties
     public Incident Incident { get; set; } = null!;
-    public Assets Assets { get; set; } = null!;
+    public Asset Asset { get; set; } = null!;
 }

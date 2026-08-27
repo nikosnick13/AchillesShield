@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using AchillesShield.Data;
+
 namespace AchillesShield
 {
     public class Program
@@ -6,6 +9,12 @@ namespace AchillesShield
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Add configuration for EF Core / PostgreSQL
+            var connectionString = builder.Configuration.GetConnectionString("WebApiDatabase");
+            // Register ApplicationDbContext (requires Npgsql.EntityFrameworkCore.PostgreSQL package)
+            builder.Services.AddDbContext<AchillesShield.Data.ApplicationDbContext>(options =>
+                options.UseNpgsql(connectionString));
 
             // Add services to the container.
 
