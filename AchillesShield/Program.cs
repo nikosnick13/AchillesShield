@@ -6,6 +6,9 @@ using AchillesShield.Service.Interfaces;
 using AchillesShield.Services;
 using AchillesShield.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace AchillesShield;
 
@@ -52,6 +55,33 @@ public class Program
         builder.Services.AddScoped<IPlaybookService, PlaybookService>();
         builder.Services.AddScoped<IPlaybookActionService, PlaybookActionService>();
         builder.Services.AddScoped<IAuditLogService, AuditLogService>();
+        builder.Services.AddScoped<IAuthService, AuthService>();
+
+        // Configure JWT authentication
+
+        var jwtKey = builder.Configuration["Jwt:Key"]
+             ?? throw new InvalidOperationException("JWT Key is missing.");
+
+        builder.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtKey))
+                };
+            });
+
+        builder.Services.AddAuthorization();
 
         var app = builder.Build();
 
@@ -62,12 +92,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
+        app.UseAuthentication();
         app.UseAuthorization();
-
-
         app.MapControllers();
-
         app.Run();
     }
 }
