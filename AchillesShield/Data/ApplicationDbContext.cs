@@ -22,7 +22,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Playbook> Playbooks { get; set; }
     public DbSet<PlaybookAction> PlaybookActions { get; set; }
     public DbSet<Role> Roles { get; set; }
-    public DbSet<User> Usres { get; set; }
+    public DbSet<User> Users { get; set; }
     public DbSet<RolePermission> RolePermissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
