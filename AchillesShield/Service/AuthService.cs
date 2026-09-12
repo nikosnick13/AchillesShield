@@ -6,6 +6,9 @@ using AchillesShield.Models;
 using AchillesShield.Repositories.Interfaces;
 using AchillesShield.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace AchillesShield.Services;
 
@@ -183,7 +186,7 @@ public class AuthService : IAuthService
         var credentials =
             new SigningCredentials(
                 securityKey,
-                SecurityAlgorithms.HmacSha256);
+            SecurityAlgorithms.HmacSha256);
 
 
         var token = new JwtSecurityToken(
