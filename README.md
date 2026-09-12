@@ -1,39 +1,42 @@
 # AchillesShield
 
-AchillesShield is a web application project (frontend + backend) for monitoring and protecting systems.
+AchillesShield is a SOAR (Security Orchestration, Automation and Response) application designed to help security analysts manage security incidents, alerts, assets, playbooks and audit logs.
 
-## Repository layout
+## Technologies
 
-- AchillesShieldFrontend/ — React frontend (TypeScript)
-- (Optional) backend/ — backend API (if present)
+### Backend
+- C#
+- ASP.NET Core Web API
+- Entity Framework Core
+- PostgreSQL
+- JWT Authentication
+- Docker
+
+### Frontend
+- React
+- TypeScript
+- Axios
+- React Router
+
+---
+
+# Build and Deployment
 
 ## Prerequisites
 
-- Node.js 18+ and npm
+Before building and running the application, make sure the following software is installed:
+
+- .NET SDK
+- Node.js and npm
+- Docker Desktop
 - Git
 
-## Setup & Run (frontend)
+---
 
-1. Open a terminal in the repository root.
-2. Start the frontend:
+## 1. Clone the Repository
 
-   cd AchillesShieldFrontend
-   npm install
-   npm start
+Clone the project from GitHub:
 
-3. Open http://localhost:3000 in your browser (default for Create React App / Vite).
-
-## Environment
-
-If the frontend requires an API URL or other secrets, set them in a .env file inside AchillesShieldFrontend (for example: REACT_APP_API_URL=http://localhost:5000).
-
-## Contributing
-
-- Fork the repo, create a branch, make changes, and open a pull request.
-- Follow existing code style and run the app/tests before submitting.
-
-## License
-
-Specify a license for this project (e.g., MIT) or contact the project owner.
-
-nikos Nikos
+```bash
+git clone <REPOSITORY_URL>
+cd AchillesShield
